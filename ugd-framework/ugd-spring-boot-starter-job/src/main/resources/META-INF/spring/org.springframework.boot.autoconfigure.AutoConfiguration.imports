@@ -1,0 +1,2 @@
+com.sukun.ugd.framework.quartz.config.UgdQuartzAutoConfiguration
+com.sukun.ugd.framework.quartz.config.UgdAsyncAutoConfiguration

@@ -1,0 +1,3 @@
+com.sukun.ugd.framework.security.config.UgdSecurityAutoConfiguration
+com.sukun.ugd.framework.security.config.UgdWebSecurityConfigurerAdapter
+com.sukun.ugd.framework.operatelog.config.UgdOperateLogConfiguration

@@ -1,0 +1,3 @@
+com.sukun.ugd.framework.mq.redis.config.UgdRedisMQProducerAutoConfiguration
+com.sukun.ugd.framework.mq.redis.config.UgdRedisMQConsumerAutoConfiguration
+com.sukun.ugd.framework.mq.rabbitmq.config.UgdRabbitMQAutoConfiguration

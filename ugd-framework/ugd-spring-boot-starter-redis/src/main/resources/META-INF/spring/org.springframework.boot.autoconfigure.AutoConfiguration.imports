@@ -1,0 +1,2 @@
+com.sukun.ugd.framework.redis.config.UgdRedisAutoConfiguration
+com.sukun.ugd.framework.redis.config.UgdCacheAutoConfiguration

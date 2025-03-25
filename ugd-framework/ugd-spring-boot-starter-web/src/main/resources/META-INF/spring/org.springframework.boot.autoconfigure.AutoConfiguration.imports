@@ -1,0 +1,6 @@
+com.sukun.ugd.framework.apilog.config.UgdApiLogAutoConfiguration
+com.sukun.ugd.framework.jackson.config.UgdJacksonAutoConfiguration
+com.sukun.ugd.framework.swagger.config.UgdSwaggerAutoConfiguration
+com.sukun.ugd.framework.web.config.UgdWebAutoConfiguration
+com.sukun.ugd.framework.xss.config.UgdXssAutoConfiguration
+com.sukun.ugd.framework.banner.config.UgdBannerAutoConfiguration

@@ -1,0 +1,3 @@
+com.sukun.ugd.framework.datasource.config.UgdDataSourceAutoConfiguration
+com.sukun.ugd.framework.mybatis.config.UgdMybatisAutoConfiguration
+com.sukun.ugd.framework.translate.config.UgdTranslateAutoConfiguration

@@ -1,0 +1,2 @@
+com.sukun.ugd.framework.tracer.config.UgdTracerAutoConfiguration
+com.sukun.ugd.framework.tracer.config.UgdMetricsAutoConfiguration

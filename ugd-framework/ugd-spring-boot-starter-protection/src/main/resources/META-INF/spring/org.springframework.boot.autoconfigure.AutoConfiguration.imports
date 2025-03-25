@@ -1,0 +1,4 @@
+com.sukun.ugd.framework.idempotent.config.UgdIdempotentConfiguration
+com.sukun.ugd.framework.lock4j.config.UgdLock4jConfiguration
+com.sukun.ugd.framework.ratelimiter.config.UgdRateLimiterConfiguration
+com.sukun.ugd.framework.signature.config.UgdApiSignatureAutoConfiguration
