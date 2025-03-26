@@ -122,8 +122,8 @@ public class KnowledgeNodeServiceImpl implements KnowledgeNodeService {
         return results.stream()
                 .map(map -> new KnowledgeRelationship(
                         map.get("sourceName"),
-                        map.get("relationType"),
-                        map.get("targetName")))
+                        map.get("targetName"),
+                        map.get("relationType")))
                 .collect(Collectors.toList());
     }
 
