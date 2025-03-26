@@ -1,6 +1,7 @@
 package com.sukun.ugd.module.tcmc.service.knowledge;
 
 import com.sukun.ugd.module.tcmc.dal.dataobject.knowledge.KnowledgeNode;
+import com.sukun.ugd.module.tcmc.dal.dataobject.knowledge.KnowledgeRelationship;
 import com.sukun.ugd.module.tcmc.dal.neo4j.KnowledgeNodeRepository;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class KnowledgeNodeServiceImpl implements KnowledgeNodeService {
@@ -28,11 +30,6 @@ public class KnowledgeNodeServiceImpl implements KnowledgeNodeService {
     }
 
     @Override
-    public Optional<KnowledgeNode> findNodeById(Long id) {
-        return knowledgeNodeRepository.findById(id);
-    }
-
-    @Override
     public List<KnowledgeNode> findNodesByNameContaining(String name) {
         return knowledgeNodeRepository.findByNameContaining(name);
     }
@@ -44,19 +41,18 @@ public class KnowledgeNodeServiceImpl implements KnowledgeNodeService {
 
     @Override
     @Transactional
-    public KnowledgeNode updateNode(Long id, String newName) {
-        if (knowledgeNodeRepository.existsById(id)) {
-            return knowledgeNodeRepository.updateNodeName(id, newName);
+    public KnowledgeNode updateNode(String oldName, String newName) {
+        if (knowledgeNodeRepository.existsByName(oldName)) {
+            return knowledgeNodeRepository.updateNodeName(oldName, newName);
         }
         return null;
     }
 
     @Override
     @Transactional
-    public void deleteNode(Long id) {
-        // 删除节点及其关系
-        if (knowledgeNodeRepository.existsById(id)) {
-            knowledgeNodeRepository.deleteByNodeId(id);
+    public void deleteNode(String name) {
+        if (knowledgeNodeRepository.existsByName(name)) {
+            knowledgeNodeRepository.deleteByName(name);
         }
     }
 
@@ -71,30 +67,27 @@ public class KnowledgeNodeServiceImpl implements KnowledgeNodeService {
     }
 
     @Override
-    public boolean existsById(Long id) {
-        return knowledgeNodeRepository.existsById(id);
-    }
-
-    // 其余关系相关方法保持不变...
-    @Override
     @Transactional
     public void createRelationship(String sourceName, String targetName, String relationshipType) {
         knowledgeNodeRepository.createRelationship(sourceName, targetName, relationshipType);
     }
 
     @Override
-    public List<Map<String, Object>> findOutgoingRelationships(String name) {
-        return knowledgeNodeRepository.findOutgoingRelationships(name);
+    public List<KnowledgeRelationship> findOutgoingRelationships(String name) {
+        List<Map<String, String>> results = knowledgeNodeRepository.findOutgoingRelationships(name);
+        return convertToRelationships(results);
     }
 
     @Override
-    public List<Map<String, Object>> findIncomingRelationships(String name) {
-        return knowledgeNodeRepository.findIncomingRelationships(name);
+    public List<KnowledgeRelationship> findIncomingRelationships(String name) {
+        List<Map<String, String>> results = knowledgeNodeRepository.findIncomingRelationships(name);
+        return convertToRelationships(results);
     }
 
     @Override
-    public List<Map<String, Object>> findAllRelationships() {
-        return knowledgeNodeRepository.findAllRelationships();
+    public List<KnowledgeRelationship> findAllRelationships() {
+        List<Map<String, String>> results = knowledgeNodeRepository.findAllRelationships();
+        return convertToRelationships(results);
     }
 
     @Override
@@ -124,4 +117,14 @@ public class KnowledgeNodeServiceImpl implements KnowledgeNodeService {
     public boolean relationshipExists(String sourceName, String targetName, String relationshipType) {
         return knowledgeNodeRepository.relationshipExists(sourceName, targetName, relationshipType);
     }
+
+    private List<KnowledgeRelationship> convertToRelationships(List<Map<String, String>> results) {
+        return results.stream()
+                .map(map -> new KnowledgeRelationship(
+                        map.get("sourceName"),
+                        map.get("relationType"),
+                        map.get("targetName")))
+                .collect(Collectors.toList());
+    }
+
 }

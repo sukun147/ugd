@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RelationshipInfo {
+public class KnowledgeRelationship {
     private String sourceName;
     private String targetName;
-    private String type;
+    private String relationType;
 }

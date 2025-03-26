@@ -6,9 +6,6 @@ import lombok.Data;
 @Data
 @Schema(description = "节点响应")
 public class NodeRespVO {
-    @Schema(description = "节点ID", example = "1234")
-    private Long id;
-
     @Schema(description = "节点名称", example = "Java编程")
     private String name;
 }
