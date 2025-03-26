@@ -9,7 +9,7 @@ import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 
 @Data
-@Node("中药")
+@Node
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "知识图谱节点")
@@ -22,7 +22,15 @@ public class KnowledgeNode {
     @Schema(description = "节点名称", example = "Java编程")
     private String name;
 
+    @Schema(description = "节点类型", example = "中药")
+    private String type;
+
     public KnowledgeNode(String name) {
         this.name = name;
+    }
+
+    public KnowledgeNode(String name, String type) {
+        this.name = name;
+        this.type = type;
     }
 }

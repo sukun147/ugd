@@ -85,6 +85,7 @@ public class KnowledgeNodeServiceImpl implements KnowledgeNodeService {
     }
 
     @Override
+    @Transactional(timeout = 6000)
     public List<KnowledgeRelationship> findAllRelationships() {
         List<Map<String, String>> results = knowledgeNodeRepository.findAllRelationships();
         return convertToRelationships(results);
